@@ -1,4 +1,4 @@
-const Blog = ({
+const Article = ({
   author,
   date,
   likes,
@@ -21,7 +21,6 @@ const Blog = ({
         </div>
         <div className="blog-likes">
           {likes}
-          <span>♡</span>
         </div>
       </div>
       <h1 className="blog-name">{title}</h1>
@@ -33,4 +32,4 @@ const Blog = ({
   );
 };
 
-export default Blog;
+export default Article;

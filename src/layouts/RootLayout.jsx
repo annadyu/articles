@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import HeaderNav from "../main page/HeaderNav";
+import HeaderNav from "../pages/main-page/HeaderNav";
 
 const RootLayout = () => {
   return (

@@ -6,14 +6,15 @@ const BlogDetails = () => {
   const { slug } = useParams();
   return (
     <div className="blog-details">
-      <h2 className="details-title">{article.title}</h2>
-      <h5 className="details-author"> author: {article.author.username}</h5>
-      {/* <p className="details-description">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis beatae
-        eos reiciendis quae deleniti cumque maxime vel dolores iusto aspernatur.
-      </p> */}
-         <ReactMarkdown>{article.body}</ReactMarkdown>
-    </div>
+      <div className="details-info">
+        <h2 className="details-title">{article.title}</h2>
+        <h5 className="blog-author">{article.author.username}</h5>
+      </div>
+      <div className="details-body">
+        <p className="details-description">{article.description}</p>
+        <ReactMarkdown>{article.body}</ReactMarkdown>
+      </div>  
+      </div>  
   );
 };
 
@@ -27,3 +28,4 @@ export const BlogDetailsLoader = async ({ params }) => {
 };
 
 export default BlogDetails;
+

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
 
 const SignUp = () => {
-    // сначала не заметила в условиях что надо сделать через react hook form. буду благодарна если просто глазами пробежитесь
+  // сначала не заметила в условиях что надо сделать через react hook form. буду благодарна если просто глазами пробежитесь
   //   const [errors, setErrors] = useState("");
   //   const [username, setUsername] = useState("");
   //   const [password, setPassword] = useState("");
@@ -35,6 +37,7 @@ const SignUp = () => {
   //       alert("registration successuful");
   //     }
   //   };
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -53,6 +56,7 @@ const SignUp = () => {
     console.log("Success:", data);
     alert("registration successuful!");
     localStorage.setItem("registeredUser", JSON.stringify(data));
+     navigate("/login/sign-in");
   };
 
   const password = watch("password");
@@ -62,9 +66,6 @@ const SignUp = () => {
       <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
         <h1 className="signup-title">Registration</h1>
         <div className="signup-inputs">
-          <label>
-            <b>Username</b>
-          </label>
           <input
             {...register("username", {
               required: "Username is required",
@@ -82,10 +83,6 @@ const SignUp = () => {
           {errors.username && (
             <p className="error">{errors.username.message}</p>
           )}
-
-          <label>
-            <b>Email</b>
-          </label>
           <input
             {...register("email", {
               required: "Email is required",
@@ -97,10 +94,6 @@ const SignUp = () => {
             placeholder="Enter email"
           />
           {errors.email && <p className="error">{errors.email.message}</p>}
-
-          <label>
-            <b>Password</b>
-          </label>
           <input
             type="password"
             {...register("password", {
@@ -120,9 +113,6 @@ const SignUp = () => {
             <p className="error">{errors.password.message}</p>
           )}
 
-          <label>
-            <b>Repeat Password</b>
-          </label>
           <input
             type="password"
             {...register("passwordRepeat", {
@@ -143,7 +133,7 @@ const SignUp = () => {
         </div>
 
         <button className="signup-btn" type="submit">
-          Register
+          Sign Up
         </button>
       </form>
     </div>

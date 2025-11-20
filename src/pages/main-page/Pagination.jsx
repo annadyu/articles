@@ -8,12 +8,15 @@ const Pagination = ( {articlesPerPage, totalArticles, currentPage, setCurrentPag
   }
   
   return (
-    <div>
+   <div>
       <ul className="pagination">
         {pageNumber.map((number) => (
           <li className="page-item" key={number}>
-            <button className="page-link" onClick={() => setCurrentPage(number)}>
-                {number}
+            <button
+              className={`page-link ${currentPage === number ? "page-active" : ""}`}
+              onClick={() => setCurrentPage(number)}
+            >
+              {number}
             </button>
           </li>
         ))}

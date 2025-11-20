@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Blog from "./Blog";
+import Article from "./Article";
 import { useEffect, useState } from "react";
 
 const Articles = ({ articles }) => {
@@ -9,7 +9,7 @@ const Articles = ({ articles }) => {
       {articles.map((article) => (
         <li key={article.slug}>
           <Link to={`/${article.slug}`}>
-            <Blog
+            <Article
               key={article.slug}
               author={article.author.username}
               date={article.createdAt}

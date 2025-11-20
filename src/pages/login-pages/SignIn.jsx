@@ -1,6 +1,5 @@
 import SignUp from "./SignUp";
 import { useState } from "react";
-
 const SignIn = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -33,8 +32,7 @@ const SignIn = () => {
   return (
     <div className="signin">
       <form action="" className="signin-form" onSubmit={loginInfoCheck}>
-        <h1 className="signin-title">Log In</h1>
-        <p className="signin-text">Please fill in this form to log in.</p>
+        <h1 className="signin-title">Sign In</h1>
         {loginErrors.length > 0 ? (
           <ul className="signin-errors-list">
             {loginErrors.map((err, index) => (
@@ -46,9 +44,6 @@ const SignIn = () => {
         ) : (
           <>
             <div className="signin-inputs">
-              <label for="email">
-                <b>Email</b>
-              </label>
               <input
                 className="signin-email-input"
                 type="text"
@@ -57,9 +52,7 @@ const SignIn = () => {
                 onChange={(el) => setLoginEmail(el.target.value)}
                 required
               />
-              <label for="psw">
-                <b>Password</b>
-              </label>
+
               <input
                 className="signin-password-input"
                 type="password"
@@ -68,15 +61,14 @@ const SignIn = () => {
                 onChange={(el) => setLoginPassword(el.target.value)}
                 required
               />
+              <button type="submit" className="signin-btn">
+                Sign In
+              </button>
             </div>
-            <button type="submit" className="signin-btn">
-              Log In
-            </button>
           </>
         )}
       </form>
     </div>
   );
 };
-
 export default SignIn;
