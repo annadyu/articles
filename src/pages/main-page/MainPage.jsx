@@ -37,7 +37,7 @@ const MainPage = () => {
   if (loading)
     return (
       <div className="loading-container">
-        <img className="loading-mg" src="/refresh.svg" alt="" />
+        <img className="loading-mg" src="./refresh.svg" alt="" />
         <div className="loading">Loading articles...</div>
       </div>
     );
