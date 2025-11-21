@@ -2,13 +2,12 @@ import { Link } from "react-router-dom";
 import Article from "./Article";
 import { useEffect, useState } from "react";
 
-const Articles = ({ articles }) => {
-  
+const Articles = ({ articles }) => { 
   return (
     <ul className="blog-list">
       {articles.map((article) => (
         <li key={article.slug}>
-          <Link to={`/${article.slug}`}>
+          <Link to={`/articles/${article.slug}`}>
             <Article
               key={article.slug}
               author={article.author.username}
