@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
+// localStorage.setItem("registeredUser", JSON.stringify(data));
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -22,15 +22,23 @@ const SignUp = () => {
   const onSubmit = (data) => {
     console.log("Success:", data);
     alert("registration successuful!");
-    localStorage.setItem("registeredUser", JSON.stringify(data));
-     navigate("/login/sign-in");
+    const { username, email, password } = data;
+    localStorage.setItem(
+      "registeredUser",
+      JSON.stringify({ username, email, password })
+    );
+    navigate("/login/sign-in");
   };
 
   const password = watch("password");
 
   return (
     <div className="signup">
-      <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="signup-form"
+        method="POST"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <h1 className="signup-title">Registration</h1>
         <div className="signup-inputs">
           <input
