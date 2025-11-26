@@ -20,20 +20,11 @@ const MainPage = ({ setArticles, articles }) => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTE1LCJleHAiOjE3NjM2MDU2Njh9.i3Xq9zDmBh9AsuW_cBc8bBGGyxt4z5Lsq7a8s2lBddc";
-
   useEffect(() => {
     setLoading(true);
     const offset = (currentPage - 1) * articlesPerPage;
     fetch(
-      `https://realworld.habsida.net/api/articles?limit=${articlesPerPage}&offset=${offset}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      }
+      `https://realworld.habsida.net/api/articles?limit=${articlesPerPage}&offset=${offset}`
     )
       .then((res) => {
         if (!res.ok) throw new Error("ошибка");
@@ -47,7 +38,8 @@ const MainPage = ({ setArticles, articles }) => {
       .finally(() => setLoading(false));
   }, [currentPage]);
 
-  if (loading) return (
+  if (loading)
+    return (
       <div className="loading-container">
         <img className="loading-mg" src="./refresh.svg" alt="" />
         <div className="loading">Loading articles...</div>

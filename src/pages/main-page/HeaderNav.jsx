@@ -29,8 +29,7 @@ const HeaderNav = () => {
         {savedUser ? (
           <NavLink className="nav-tag login-icon"> {savedUsername}</NavLink>
         ) : (
-          // <NavLink to="/profile" className="nav-tag login-icon"> {savedUsername}</NavLink>
-          <NavLink to="/login" className="nav-tag login-icon">
+          <NavLink to="/sign-in" className="nav-tag login-icon">
             Log In
           </NavLink>
         )}

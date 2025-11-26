@@ -441,6 +441,10 @@ body {
 
 .signup {
   margin-top: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .signup-form {
@@ -588,6 +592,13 @@ body {
   scale: 1.1;
 }
 
+.signin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .signin-form {
   display: flex;
   flex-direction: column;
@@ -654,6 +665,20 @@ body {
 
 .signin-errors-list li {
   margin-bottom: 30px;
+}
+
+.registration-nav {
+  display: flex;
+  margin-top: 50px;
+  color: #AAAAAA;
+}
+
+.registration-nav p {
+  margin-right: 25px;
+}
+
+.registration-nav-link {
+  text-decoration: underline;
 }
 
 .greating-user {

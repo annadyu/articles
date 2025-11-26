@@ -35,10 +35,8 @@ function App() {
           path="articles"
           element={<MainPage articles={articles} setArticles={setArticles} />}
         />
-        <Route path="login" element={<LogInLayout />}>
-          <Route path="sign-in" element={<SignIn />} />
-          <Route path="sign-up" element={<SignUp />} />
-        </Route>
+        <Route path="sign-in" element={<SignIn />} />
+        <Route path="sign-up" element={<SignUp />} />
         <Route
           path="articles/:slug"
           element={<BlogDetails />}

@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-// localStorage.setItem("registeredUser", JSON.stringify(data));
-
 const SignUp = () => {
   const navigate = useNavigate();
   const {
@@ -19,26 +17,40 @@ const SignUp = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log("Success:", data);
-    alert("registration successuful!");
+  const onSubmit = async (data) => {
     const { username, email, password } = data;
     localStorage.setItem(
       "registeredUser",
       JSON.stringify({ username, email, password })
     );
-    navigate("/login/sign-in");
+    try {
+      const response = await fetch("http://localhost:3001/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+      if (!response.ok) {
+        throw new Error("Что-то пошло не так!");
+      }
+
+      const responseData = await response.json();
+      console.log("Success", responseData);
+      alert("registration successuful!");
+
+      navigate("/sign-in");
+    } catch (error) {
+      console.log(error);
+      alert("Что-то пошло не так!");
+    }
   };
 
   const password = watch("password");
 
   return (
     <div className="signup">
-      <form
-        className="signup-form"
-        method="POST"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
         <h1 className="signup-title">Registration</h1>
         <div className="signup-inputs">
           <input

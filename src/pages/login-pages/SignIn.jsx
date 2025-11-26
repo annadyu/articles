@@ -1,7 +1,7 @@
 import SignUp from "./SignUp";
+import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 // const [loginEmail, setLoginEmail] = useState("");
 // const [loginPassword, setLoginPassword] = useState("");
@@ -30,13 +30,26 @@ import { useState } from "react";
 //     alert("log in successufully");
 //   }
 // };
+// const savedUser = JSON.parse(localStorage.getItem("registeredUser")) || {};
+// const savedEmail = savedUser?.email;
+// const savedPassword = savedUser?.password;
+
+// if (email === savedEmail && password === savedPassword) {
+//     console.log("Success:", data);
+//     alert("Login successful!");
+//     navigate("/");
+//   } else {
+//     alert("Invalid email or password");
+//   }
+// if (!response.ok) {
+//   const errorData = await response.json();
+//   throw new Error(errorData.message || "Что-то пошло не так!");
+// }
+// const responseData = await response.json();
+// console.log("Log In success", responseData);
+// alert("Log In success!");
 const SignIn = () => {
   const navigate = useNavigate();
-
-  const savedUser = JSON.parse(localStorage.getItem("registeredUser")) || {};
-  const savedEmail = savedUser?.email;
-  const savedPassword = savedUser?.password;
-
   const {
     register,
     handleSubmit,
@@ -48,15 +61,24 @@ const SignIn = () => {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const { email, password } = data;
+    try {
+      const response = await fetch("http://localhost:3001/users");
+      const users = await response.json();
+      const user = users.find(
+        (us) => us.email === email && us.password === password
+      );
 
-    if (email === savedEmail && password === savedPassword) {
-      console.log("Success:", data);
-      alert("Login successful!");
-      navigate("/");
-    } else {
-      alert("Invalid email or password");
+      if (user) {
+        alert("Log In success!");
+        navigate("/");
+      } else {
+        alert("invalid password or email");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Что-то пошло не так!");
     }
   };
 
@@ -100,9 +122,13 @@ const SignIn = () => {
           )}
         </div>
         <button className="signin-btn" type="submit">
-          Sign In{" "}
+          Sign In
         </button>
       </form>
+      <div className="registration-nav">
+        <p> Don't have an account yet? </p>
+       <NavLink to="/sign-up" className="registration-nav-link">Sign Up first</NavLink>
+      </div>
     </div>
   );
 };

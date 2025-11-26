@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "username": "anna",
+      "email": "annadyu666@gmail.com",
+      "password": "1234567",
+      "avatar": "https://joesch.moe/api/v1/jess",
+      "id": "742b"
+    },
+    {
+      "id": "9355",
+      "username": "qwert",
+      "email": "qwert@gmail.com",
+      "password": "qwerty"
+    },
+    {
+      "id": "4af6",
+      "username": "qqwqwqw",
+      "email": "aaaaaaaaaa@gmail.com",
+      "password": "123456789"
+    },
+    {
+      "id": "ac60",
+      "username": "hoskazvki",
+      "email": "annadyu666@gmail.com",
+      "password": "1111111"
+    },
+    {
+      "id": "46cc",
+      "username": "werrr",
+      "email": "annadyu666@gmail.com",
+      "password": "1111111"
+    },
+    {
+      "id": "c647",
+      "username": "werr7878",
+      "email": "annadyu666@gmail.com",
+      "password": "1111111"
+    },
+    {
+      "id": "cf1f",
+      "username": "qqqq",
+      "email": "qq@gmail.com",
+      "password": "qqqqqqq"
+    }
+  ]
+}
