@@ -26,13 +26,37 @@ const ProfileEditing = () => {
       passwordRepeat: savedUsername,
     },
   });
+  const onSubmit = async (data) => {
+    const { username, email, password,  image: avatar } = data;
+    localStorage.setItem(
+      "registeredUser",
+      JSON.stringify({ username, email, password, image: avatar })
+    );
+    try {
+      const response = await fetch("https://realworld.habsida.net/api/user", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: { username, email, password, image: avatar },
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Что-то пошло не так!");
+      }
 
-  const onSubmit = (data) => {
-    console.log("Success:", data);
-    alert("Profile editing successuful!");
-    localStorage.setItem("registeredUser", JSON.stringify(data));
+      const responseData = await response.json();
+      localStorage.setItem("registeredUser", JSON.stringify(data));
+      console.log("Success", responseData);
+      alert("editing successuful!");
+
+      navigate("/sign-in");
+    } catch (error) {
+      console.log(error);
+      alert("Что-то пошло не так!");
+    }
   };
-
   const password = watch("password");
 
   return (
@@ -94,7 +118,9 @@ const ProfileEditing = () => {
             placeholder="Enter avatar Url"
           />
           {errors.avatar && <p className="error">{errors.avatar.message}</p>}
-          <button className="editing-btn" type="submit">Submit</button>
+          <button className="editing-btn" type="submit">
+            Submit
+          </button>
           <button type="button" className="logout-btn" onClick={handleLogout}>
             Or click here to logout
           </button>

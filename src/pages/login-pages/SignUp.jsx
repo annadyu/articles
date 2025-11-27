@@ -24,12 +24,14 @@ const SignUp = () => {
       JSON.stringify({ username, email, password })
     );
     try {
-      const response = await fetch("http://localhost:3001/users", {
+      const response = await fetch("https://realworld.habsida.net/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({
+          user: { username, email, password },
+        }),
       });
       if (!response.ok) {
         throw new Error("Что-то пошло не так!");

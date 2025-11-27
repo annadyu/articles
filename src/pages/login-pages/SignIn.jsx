@@ -62,20 +62,30 @@ const SignIn = () => {
   });
 
   const onSubmit = async (data) => {
-    const { email, password } = data;
+    const { username, email, password } = data;
+    localStorage.setItem(
+      "registeredUser",
+      JSON.stringify({ username, email, password })
+    );
     try {
-      const response = await fetch("http://localhost:3001/users");
-      const users = await response.json();
-      const user = users.find(
-        (us) => us.email === email && us.password === password
-      );
-
-      if (user) {
-        alert("Log In success!");
-        navigate("/");
-      } else {
-        alert("invalid password or email");
+      const response = await fetch("https://realworld.habsida.net/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: { email, password },
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Что-то пошло не так!");
       }
+
+      const responseData = await response.json();
+      console.log("Success", responseData);
+      alert("log in successuful!");
+
+      navigate("/");
     } catch (error) {
       console.log(error);
       alert("Что-то пошло не так!");
