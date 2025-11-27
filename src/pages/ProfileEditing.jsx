@@ -9,9 +9,9 @@ const ProfileEditing = () => {
     navigate("/login");
   };
   const savedUser = JSON.parse(localStorage.getItem("registeredUser")) || {};
-  const savedEmail = savedUser?.email;
-  const savedPassword = savedUser?.password;
-  const savedUsername = savedUser?.username;
+  const savedEmail = savedUser?.email ?? "";
+  const savedPassword = "";
+  const savedUsername = savedUser?.username ?? "";
 
   const {
     register,
@@ -23,19 +23,18 @@ const ProfileEditing = () => {
       username: savedUsername,
       email: savedEmail,
       password: savedPassword,
-      passwordRepeat: savedUsername,
+      passwordRepeat: savedPassword,
+      avatar: savedUser?.image ?? "",
     },
   });
   const onSubmit = async (data) => {
-    const { username, email, password,  image: avatar } = data;
-    localStorage.setItem(
-      "registeredUser",
-      JSON.stringify({ username, email, password, image: avatar })
-    );
+    const { username, email, password, avatar } = data;
+    const token = localStorage.getItem("token");
     try {
       const response = await fetch("https://realworld.habsida.net/api/user", {
         method: "PUT",
         headers: {
+          "Authorization": `${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -43,15 +42,18 @@ const ProfileEditing = () => {
         }),
       });
       if (!response.ok) {
-        throw new Error("Что-то пошло не так!");
+        const errorData = await response.json();
+        console.log("SERVER ERROR:", errorData);
+        alert(JSON.stringify(errorData.errors, null, 2));
+        return;
       }
 
       const responseData = await response.json();
-      localStorage.setItem("registeredUser", JSON.stringify(data));
+      localStorage.setItem("registeredUser", JSON.stringify(responseData.user));
       console.log("Success", responseData);
       alert("editing successuful!");
 
-      navigate("/sign-in");
+      navigate("/");
     } catch (error) {
       console.log(error);
       alert("Что-то пошло не так!");

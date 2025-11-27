@@ -19,10 +19,6 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     const { username, email, password } = data;
-    localStorage.setItem(
-      "registeredUser",
-      JSON.stringify({ username, email, password })
-    );
     try {
       const response = await fetch("https://realworld.habsida.net/api/users", {
         method: "POST",
@@ -39,6 +35,7 @@ const SignUp = () => {
 
       const responseData = await response.json();
       console.log("Success", responseData);
+      localStorage.setItem("registeredUser", JSON.stringify(responseData.user));
       alert("registration successuful!");
 
       navigate("/sign-in");
