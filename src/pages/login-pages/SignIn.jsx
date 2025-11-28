@@ -42,6 +42,7 @@ const SignIn = () => {
       console.log("Success", responseData);
       localStorage.setItem("registeredUser", JSON.stringify(responseData.user));
       localStorage.setItem("token", responseData.user.token);
+      localStorage.setItem("savedPassword", responseData.user.password);
    
       setUser(responseData.user);
       alert("log in successuful!");

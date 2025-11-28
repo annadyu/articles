@@ -5,9 +5,9 @@ import { LoginUser } from "../Zustand";
 const HeaderNav = () => {
   const navigate = useNavigate();
 
-  const user = LoginUser((state) => state.user)
+  const user = LoginUser((state) => state.user);
 
-  // const savedUser = JSON.parse(localStorage.getItem("registeredUser"));
+  const savedUser = JSON.parse(localStorage.getItem("registeredUser"));
   // const savedUsername = savedUser?.username;
 
   return (
@@ -20,7 +20,7 @@ const HeaderNav = () => {
         <NavLink to="/new-article" className="nav-tag new-post">
           New post
         </NavLink>
-        {user ? (
+  {user || savedUser ?  (
           <NavLink to="/profile" className="nav-tag settings">
             Setings
           </NavLink>
@@ -29,8 +29,8 @@ const HeaderNav = () => {
             Setings
           </NavLink>
         )}
-        {user ? (
-          <NavLink className="nav-tag login-icon">  {user.username}</NavLink>
+     {user || savedUser ?  (
+          <NavLink className="nav-tag login-icon">   {user?.username || savedUser.username}</NavLink>
         ) : (
           <NavLink to="/sign-in" className="nav-tag login-icon">
             Log In

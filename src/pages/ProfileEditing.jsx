@@ -6,11 +6,12 @@ const ProfileEditing = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("registeredUser");
-    navigate("/login");
+    localStorage.removeItem("password");
+    navigate("/sign-in");
   };
   const savedUser = JSON.parse(localStorage.getItem("registeredUser")) || {};
   const savedEmail = savedUser?.email ?? "";
-  const savedPassword = "";
+  const savedPassword = localStorage.getItem("savedPassword");
   const savedUsername = savedUser?.username ?? "";
 
   const {
@@ -34,11 +35,14 @@ const ProfileEditing = () => {
       const response = await fetch("https://realworld.habsida.net/api/user", {
         method: "PUT",
         headers: {
-          "Authorization": `${token}`,
+          Authorization: `${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user: { username, email, password, image: avatar },
+          username,
+          email,
+          password,
+          image: avatar,
         }),
       });
       if (!response.ok) {

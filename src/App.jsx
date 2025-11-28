@@ -19,8 +19,6 @@ import SignUp from "./pages/login-pages/SignUp.jsx";
 //roots
 import RootLayout from "./layouts/RootLayout.jsx";
 import { BlogDetailsLoader } from "./pages/BlogDetails.jsx";
-import LogInLayout from "./layouts/LogInLayout.jsx";
-
 function App() {
   const [articles, setArticles] = useState([]);
 
