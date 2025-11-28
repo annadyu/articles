@@ -1,1 +1,1 @@
-https://annadyu.github.io/
+https://annadyu.github.io/articles/
