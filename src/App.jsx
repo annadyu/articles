@@ -19,6 +19,7 @@ import SignUp from "./pages/login-pages/SignUp.jsx";
 //roots
 import RootLayout from "./layouts/RootLayout.jsx";
 import { BlogDetailsLoader } from "./pages/BlogDetails.jsx";
+import PrivateRoute from "./layouts/PrivateRoute.jsx";
 function App() {
   const [articles, setArticles] = useState([]);
 
@@ -33,8 +34,10 @@ function App() {
           path="articles"
           element={<MainPage articles={articles} setArticles={setArticles} />}
         />
-        <Route path="sign-in" element={<SignIn />} />
-        <Route path="sign-up" element={<SignUp />} />
+        <Route element={<PrivateRoute/>}>
+          <Route path="sign-in" element={<SignIn />} />
+          <Route path="sign-up" element={<SignUp />} />
+        </Route>
         <Route
           path="articles/:slug"
           element={<BlogDetails />}

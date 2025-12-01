@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { LoginUser } from "../Zustand";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const { setUser } = LoginUser();
   const {
     register,
     handleSubmit,
@@ -19,6 +21,7 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     const { username, email, password } = data;
+
     try {
       const response = await fetch("https://realworld.habsida.net/api/users", {
         method: "POST",
@@ -36,9 +39,12 @@ const SignUp = () => {
       const responseData = await response.json();
       console.log("Success", responseData);
       localStorage.setItem("registeredUser", JSON.stringify(responseData.user));
+      localStorage.setItem("token", responseData.user.token);
+      setUser(responseData.user);
+      localStorage.setItem("savedPassword", responseData.user.password);
       alert("registration successuful!");
 
-      navigate("/sign-in");
+      navigate("/");
     } catch (error) {
       console.log(error);
       alert("Что-то пошло не так!");

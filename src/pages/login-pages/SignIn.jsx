@@ -6,7 +6,7 @@ import { LoginUser } from "../Zustand";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const setUser = LoginUser((state) => state.setUser);
+  const { setUser } = LoginUser();
 
   const {
     register,
@@ -43,7 +43,6 @@ const SignIn = () => {
       localStorage.setItem("registeredUser", JSON.stringify(responseData.user));
       localStorage.setItem("token", responseData.user.token);
       localStorage.setItem("savedPassword", responseData.user.password);
-   
       setUser(responseData.user);
       alert("log in successuful!");
 

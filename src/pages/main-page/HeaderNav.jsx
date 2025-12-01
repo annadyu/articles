@@ -20,7 +20,7 @@ const HeaderNav = () => {
         <NavLink to="/new-article" className="nav-tag new-post">
           New post
         </NavLink>
-  {user || savedUser ?  (
+        {user?.username || savedUser?.username ? (
           <NavLink to="/profile" className="nav-tag settings">
             Setings
           </NavLink>
@@ -29,8 +29,11 @@ const HeaderNav = () => {
             Setings
           </NavLink>
         )}
-     {user || savedUser ?  (
-          <NavLink className="nav-tag login-icon">   {user?.username || savedUser.username}</NavLink>
+        {user?.username || savedUser?.username ? (
+          <NavLink className="nav-tag login-icon">
+            {" "}
+            {user?.username || savedUser.username}
+          </NavLink>
         ) : (
           <NavLink to="/sign-in" className="nav-tag login-icon">
             Log In
